@@ -5,7 +5,7 @@ provider "digitalocean" {
 
 resource "digitalocean_ssh_key" "default" {
   name       = "ssh key"
-  public_key = "${file("/home/mrbond/.ssh/id_rsa.pub")}"
+  public_key = "${file("/home/mbond/.ssh/id_rsa.pub")}"
 }
 
 resource "digitalocean_volume" "volume-tfo-01" {
@@ -18,7 +18,7 @@ resource "digitalocean_volume" "volume-tfo-01" {
 resource "digitalocean_droplet" "server-tfo-01" {
   name               = "the-forgotten-01"
   size               = "1gb"
-  image              = "centos-7-x64"
+  image              = 25045709
   region             = "${var.region}"
   ipv6               = false
   private_networking = false
@@ -93,6 +93,13 @@ resource "digitalocean_record" "mn-txt-dkim" {
 resource "digitalocean_domain" "the-forgotten-org" {
   name       = "the-forgotten.org"
   ip_address = "${digitalocean_floating_ip.ip-tfo-01.ip_address}"
+}
+
+resource "digitalocean_record" "tfo-grapevine" {
+  domain = "${digitalocean_domain.the-forgotten-org.name}"
+  type   = "CNAME"
+  name   = "grapevine"
+  value  = "@"
 }
 
 resource "digitalocean_record" "tfo-www" {
