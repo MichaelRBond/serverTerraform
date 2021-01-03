@@ -1,7 +1,7 @@
 resource "digitalocean_firewall" "web" {
   name = "only-22-80-443"
 
-  droplet_ids = ["${digitalocean_droplet.server-tfo-01.id}"]
+  droplet_ids = [digitalocean_droplet.server-tfo-01.id]
 
   inbound_rule {
     protocol         = "tcp"
