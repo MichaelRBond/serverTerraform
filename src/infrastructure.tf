@@ -1,7 +1,6 @@
 # Configure the DigitalOcean Provider
 provider "digitalocean" {
   token   = var.do_token
-  version = "~> 2.3.0"
 }
 
 resource "digitalocean_ssh_key" "default" {
