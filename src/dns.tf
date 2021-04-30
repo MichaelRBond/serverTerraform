@@ -340,6 +340,19 @@ resource "digitalocean_domain" "trumpocalyp-se" {
   ip_address = digitalocean_floating_ip.ip-tfo-01.ip_address
 }
 
+# robertbond.me
+resource "digitalocean_domain" "rob" {
+  name = "robertbond.me"
+  ip_address = digitalocean_floating_ip.ip-tfo-01.ip_address
+}
+
+resource "digitalocean_record" "rob-www" {
+  domain = digitalocean_domain.rob.name
+  type   = "CNAME"
+  name   = "www"
+  value  = "@"
+}
+
 # emmasbond.me
 resource "digitalocean_domain" "esb" {
   name       = "emmasbond.me"
